@@ -1,56 +1,24 @@
-// Campground routes
 
-/* 
-Restful routes for campgrounds (routes with crud operations + http methods)
-Set up middleware
-router.get(path, middlewareX, middlewareY, controller_function)
-*/
-
-// Require
 const express = require('express');
 const router = express.Router();
-const campgrounds = require('../controllers/campgrounds'); // controller for campground routes
-const catchAsync = require('../utilities/catchAsync'); // require func for handling async errors
+const campgrounds = require('../controllers/campgrounds'); 
+const catchAsync = require('../utilities/catchAsync'); 
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware'); 
-const multer = require('multer'); // middleware for handling multipart/form-data, for uploading file
-const { storage } = require('../cloudinary'); // cloudinary storage
-const upload = multer({ storage }); // store using cloudinary storage
+const multer = require('multer'); 
+const { storage } = require('../cloudinary'); 
+const upload = multer({ storage }); 
 
-// Routes
 router.route('/')
-    .get(catchAsync (campgrounds.index)) // index route
-    .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync (campgrounds.createCampground)) // new route - create campground 
-                         // .single expect one file/image, .array expect multiple files
+    .get(catchAsync (campgrounds.index)) 
+    .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync (campgrounds.createCampground)) 
 
-router.get('/new', isLoggedIn, campgrounds.renderNewForm); // new route - render form 
+router.get('/new', isLoggedIn, campgrounds.renderNewForm); 
 
 router.route('/:id')
-    .get(catchAsync (campgrounds.showCampround)) // show campground route
-    .put(isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(campgrounds.updateCampground)) // edit route - udpate campground 
-    .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground)) // delete campground route
+    .get(catchAsync (campgrounds.showCampround)) 
+    .put(isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(campgrounds.updateCampground)) 
+    .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground)) 
 
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm)); // edit route - render form
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm)); 
 
-
-// Old way of structuring routes: 
-
-// Index route
-// router.get('/', catchAsync (campgrounds.index));
-
-// New campground route
-// router.get('/new', isLoggedIn, campgrounds.renderNewForm);
-// router.post('/', isLoggedIn, validateCampground, catchAsync (campgrounds.createCampground));
-
-// Show campground route
-// router.get('/:id', catchAsync (campgrounds.showCampround));
-
-// Edit/Update campground route
-// router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
-// router.put('/:id', isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground));
-
-// Delete campground route
-// router.delete('/:id', isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
-
-
-// Export routes
 module.exports = router;

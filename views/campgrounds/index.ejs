@@ -1,24 +1,14 @@
 <% layout('layouts/boilerplate') %> 
-<!--  
-    all content below is passed as 'body' to boilerplate
-    template in views/layouts/boilerplate.ejs
-    - will render a page with the boilerplate as initial
-      layout, with the content as this file inserted as 'body'
-      in the boilerplate
--->
-
 <link rel="stylesheet" href="/stylesheets/index.css">
 
-<!-- header section -->
 <div class="section">
     <h1 class="text-white">All campgrounds</h1>
-    <p class="lead text-white text-center my-4">Welcome to C! <br> Jump right in and explore our many campgrounds. <br>
+    <p class="lead text-white text-center my-4">Welcome to CampSite! <br> Jump right in and explore our many campgrounds. <br>
                 Feel free to share some of your own and comment on others! </p>
     <a href="#showCampgrounds" class="btn btn-large btn-secondary fw-bold bg-white px-3" id="scroll">View all campgrounds</a> 
 </div>
 
-<!-- map section-->
-<div class="row d-none d-md-block"> <!-- hide section on screens < medium -->
+<div class="row d-none d--block"> 
     <div class="buffer ">
         <div class="col-md-5">
             <h5 class="text-center">View all our campground locations</h5>
@@ -31,7 +21,6 @@
     </div>
 </div>
 
-<!-- all campgrounds -->
 <div class="section section2" id="showCampgrounds">
     <div class="row card-group m-5">
         <% for(let campground of campgrounds) { %>
@@ -39,7 +28,7 @@
                 <div class="card rounded border-0" style="width:23rem">
                     <div class="card-img">
                         <% if(campground.images.length) {%>
-                        <img class="img-fluid" src="<%= campground.images[0].url %>" alt=""> <!-- display first image in images array -->
+                        <img class="img-fluid" src="<%= campground.images[0].url %>" alt=""> 
                         <% } else { %>
                             <img class="img-fluid" src="https://res.cloudinary.com/dmhlzrw28/image/upload/v1675781304/YelpCamp/lk9ukogikiv2vapyfsml.jpg" alt=""> <!-- display default image -->
                         <% } %>
@@ -58,11 +47,9 @@
     </div>
 </div>
 
-<!-- use ejs to create javascript variable mapToken that we can access in our js (clusterMap) -->
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
-    const campgrounds = {features: <%- JSON.stringify(campgrounds) %>} // mapbox expect data in an array under the key 'features'
+    const campgrounds = {features: <%- JSON.stringify(campgrounds) %>} 
 </script>
 
-<!-- include js for the clusterMap -->
 <script src="/javascripts/clusterMap.js"></script>

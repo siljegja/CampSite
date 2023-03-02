@@ -75,7 +75,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser()); 
 
 app.use((req, res, next) => {
-    // console.log(process.env.MAPBOX_TOKEN) 
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
@@ -85,10 +84,6 @@ app.use((req, res, next) => {
 app.use('/campgrounds', campgroundRoutes); 
 app.use('/campgrounds/:id/reviews', reviewRoutes); 
 app.use('/', userRoutes); 
-
-app.get('/', (req, res) => {
-    res.render('home')
-})
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page not found', 404))

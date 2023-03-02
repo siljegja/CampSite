@@ -11,29 +11,20 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
-// Oneliner func - picks a random elm from a given array
-// - pick a rand num * length of array, floor that - access that out of the array
 const sample = array => array[Math.floor(Math.random() * array.length)];
 
-// Func adds new campgrounds
 const seedDB = async() => {
-    await Campground.deleteMany({}); // delete all existing campgrounds
-    // loop 20 times, for each loop:
-    // - make a new campground set to 'city, state'
-    //   -> picks a rand num that selects a rand city and a rand state in cities.js
-    // - add title: a rand descriptor and a rand place (from seedHelpers.js)
-    //   -> passes arr descriptors and places from seedHelpers.js to sample() - returns random
+    await Campground.deleteMany({}); 
     for(let i = 0; i < 21; i++) {
-        const random1000 = Math.floor(Math.random() * 1000); // .rand finds a rand num between 0-1, .floor ensures an integer
+        const random1000 = Math.floor(Math.random() * 1000); 
         const price = Math.floor(Math.random() * 20) + 10; 
         const camp = new Campground({
-            // YOUR USER ID
-            author: '63db7d1d8a94ab78c16d68e5',
+            author: '64006e2a54554f2b42e7e6fe',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iusto eum repudiandae animi, repellat voluptatum autem? Quae delectus sit veniam accusamus quas asperiores eaque cumque nemo officiis culpa? In, quae?',
             price, 
-            geometry: { // set random coordinates for our seeds (used for the geomap)
+            geometry: { /
                 type : 'Point', 
                 coordinates : [
                     cities[random1000].longitude, 
@@ -55,9 +46,6 @@ const seedDB = async() => {
     }
 }
 
-// execute seedDB() that creates new Campgrounds - then closes
-// - so we can call this index.js file to get new camps, then it closes itself
-// - !! call this in terminal: node seeds/index.js  (won't work with nodemon)
 seedDB().then(() => {
     mongoose.connection.close();
 })
