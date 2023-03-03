@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/stylesheets/new.css">
 
 <div class="row"> 
-    <div class="main col-md-6 mx-auto m-5 p-3"> 
+    <div class="col-md-6 mx-auto m-5 p-3" id="main"> 
         <h2 class="text-center m-4">Edit Campground <%= campground.name %></h2>
         <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form p-4" enctype="multipart/form-data">
             <div class="mb-3">

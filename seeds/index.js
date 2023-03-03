@@ -24,7 +24,7 @@ const seedDB = async() => {
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iusto eum repudiandae animi, repellat voluptatum autem? Quae delectus sit veniam accusamus quas asperiores eaque cumque nemo officiis culpa? In, quae?',
             price, 
-            geometry: { /
+            geometry: { 
                 type : 'Point', 
                 coordinates : [
                     cities[random1000].longitude, 

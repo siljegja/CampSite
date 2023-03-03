@@ -1,6 +1,4 @@
-<head>
-    <link rel="stylesheet" href="/stylesheets/nav.css">
-</head>
+<link rel="stylesheet" href="/stylesheets/nav.css">
 
 <nav class="navbar navbar-expand-lg navbar-dark d-flex w-100 p-3 mx-auto">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,13 +11,13 @@
             <a class="nav-link" href="/campgrounds/new">New Campground</a>
         </div>
         <div class="navbar-nav ms-auto">
-            <% if(!currentUser) { %>  
+            <% if(!currentUser) { %>
             <a class="nav-link" href="/register">Register</a>
             <a class="nav-link" href="/login">Login</a>
-            <% } else { %> 
+            <% } else { %>
             <a class="nav-link" href="/logout">Logout</a>
-            <% } %> 
-        </div> 
+            <% } %>
+        </div>
     </div>
 </nav>
 

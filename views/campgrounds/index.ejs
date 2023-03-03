@@ -1,15 +1,15 @@
 <% layout('layouts/boilerplate') %> 
 <link rel="stylesheet" href="/stylesheets/index.css">
 
-<div class="section">
+<div id="intro">
     <h1 class="text-white">All campgrounds</h1>
     <p class="lead text-white text-center my-4">Welcome to CampSite! <br> Jump right in and explore our many campgrounds. <br>
                 Feel free to share some of your own and comment on others! </p>
-    <a href="#showCampgrounds" class="btn btn-large btn-secondary fw-bold bg-white px-3" id="scroll">View all campgrounds</a> 
+    <a href="#allCampgrounds" class="btn btn-large btn-secondary fw-bold bg-white px-3" id="scroll">View all campgrounds</a> 
 </div>
 
-<div class="row d-none d--block"> 
-    <div class="buffer ">
+<div class="row d-none d-md-block"> 
+    <div id="buffer">
         <div class="col-md-5">
             <h5 class="text-center">View all our campground locations</h5>
         </div>
@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="section section2" id="showCampgrounds">
+<div id="allCampgrounds">
     <div class="row card-group m-5">
         <% for(let campground of campgrounds) { %>
             <div class="col-md-4 d-flex justify-content-center">
